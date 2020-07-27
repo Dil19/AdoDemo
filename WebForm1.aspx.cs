@@ -69,11 +69,12 @@ namespace AdoDemo001
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("Select * from tblProduc where Name like @ProductName", con);
-
                 /*string Command = "Select * from tblProduc where Name like @Name";
 
                 SqlCommand cmd = new SqlCommand(Command, con);*/
+
+                SqlCommand cmd = new SqlCommand("spGetProductByName", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ProductName", TextBox1.Text + "%");
                 con.Open();
                 GridView1.DataSource = cmd.ExecuteReader();
