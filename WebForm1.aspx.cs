@@ -43,6 +43,22 @@ namespace AdoDemo001
                 GridView1.DataSource = cmd.ExecuteReader();
                 GridView1.DataBind();
                 con.Close();
+
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.CommandText = "Select Count(ProductId) from tblProduc";
+                cmd2.Connection = con;
+                con.Open();
+                int TotalRows = (int)cmd2.ExecuteScalar();
+                Response.Write("total rows = " + TotalRows.ToString() + "<br/>");
+
+                cmd2.CommandText = "Insert into tblProduc values('4', 'calculator', '100', '230'), ('5', 'todelete', '100', '230')";
+                int TotalRowsInserted = cmd2.ExecuteNonQuery();
+                Response.Write("total rows inserted = " + TotalRowsInserted.ToString() + "<br/>");
+
+
+                cmd2.CommandText = "delete from tblProduc where ProductId in(4,5)";
+                int TotalRowsDeleted = cmd2.ExecuteNonQuery();
+                Response.Write("total rows deleted = " + TotalRowsDeleted.ToString() + "<br/>");
             }
 
 
