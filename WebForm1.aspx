@@ -8,6 +8,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Get Product" />
         <div>
         </div>
         <asp:GridView ID="GridView1" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" CellSpacing="2" Width="332px">

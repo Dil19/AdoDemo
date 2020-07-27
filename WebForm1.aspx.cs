@@ -15,7 +15,7 @@ namespace AdoDemo001
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            //string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
             /* SqlConnection con = new SqlConnection(CS);
              try
@@ -36,7 +36,7 @@ namespace AdoDemo001
              }*/
 
 
-            using (SqlConnection con = new SqlConnection(CS))
+            /*using (SqlConnection con = new SqlConnection(CS))
             {
                 SqlCommand cmd = new SqlCommand("Select * from tblProduc", con);
                 con.Open();
@@ -59,9 +59,27 @@ namespace AdoDemo001
                 cmd2.CommandText = "delete from tblProduc where ProductId in(4,5)";
                 int TotalRowsDeleted = cmd2.ExecuteNonQuery();
                 Response.Write("total rows deleted = " + TotalRowsDeleted.ToString() + "<br/>");
+            }*/
+
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                string Command = "Select * from tblProduc where Name like '" + TextBox1.Text + "%'";
+
+                SqlCommand cmd = new SqlCommand(Command, con);
+                con.Open();
+                GridView1.DataSource = cmd.ExecuteReader();
+                GridView1.DataBind();
+
+                Response.Write("passed");
+
+
             }
-
-
         }
     }
 }
